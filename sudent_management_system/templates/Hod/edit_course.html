@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    <form  method="post" action="{% url 'add_subject' %}" >
+        {% csrf_token %}
+        <div class="col-12">
+            <h5 class="form-title"><span>Edit Course</span></h5>
+        </div>
+        {% include 'includes/messages.html' %}
+             <div class="col-12 col-sm-11">
+            <div class="form-group">
+                <label>Course Name</label>
+                <input class="form-control" name="name" type="text" value="{{course.name}}" required>
+                <input class="form-control" name="course_id" type="text" value="{{course.id}}" hidden>
+
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Update Course</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

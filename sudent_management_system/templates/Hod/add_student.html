@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="row" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+    <form  method="post" action="{% url 'add_student' %}" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="col-12">
+            <h5 class="form-title"><span>Add Student</span></h5>
+        </div>
+        {% include 'includes/messages.html' %}
+        <div class="col-12 col-sm-11">
+            <div class="form-group">
+                <label>Profile Pic</label>
+                <input class="form-control" name="profile_pic" type="file" required>
+            </div>
+        </div>
+        <br/>
+        <div class="col-12 col-sm-11">
+            <div class="form-group">
+                <label>First Name</label>
+                <input class="form-control" name="first_name" type="text" required>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-11">
+            <div class="form-group">
+                <label>Last Name</label>
+                <input class="form-control" name="last_name" type="text" required>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-11">
+            <div class="form-group">
+                <label>Email</label>
+                <input class="form-control" name="email" type="text" required>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-11">
+            <div class="form-group">
+                <label>Username</label>
+                <input class="form-control" name="username" type="text" required>
+            </div>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <div class="form-group" >
+                <label>Password</label>
+                <input class="form-control" type="password" name="password" required>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label>Gender</label>
+                    <select class="form-control" name="gender">
+                        <option>Select Gender</option>
+                        <option value="Female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Others">Others</option>
+                    </select>
+            </div>
+        </div>
+        <div class="col-sm-11 ">
+            <div class="form-group">
+                <label>Course</label>
+                    <select class="form-control" name="course_id">
+                        <option>Select Course</option>
+                         {% for i in course %}
+                            <option value="{{i.id }}">{{i.name}}</option>
+                         {% endfor %}
+
+                    </select>
+            </div>
+        </div>
+
+         <div class="col-12 col-sm-6">
+            <div class="form-group">
+                <label>Address</label>
+                <textarea class="form-control" name="address" required></textarea>
+            </div>
+        </div>
+
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Add Student</button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}
