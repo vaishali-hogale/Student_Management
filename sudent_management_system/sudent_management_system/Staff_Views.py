@@ -45,3 +45,29 @@ def STAFF_LEAVE_APPLY_SAVE(request):
         )
         leave.save()
         return redirect('staff_apply_leave')
+
+def STAFF_TAKE_ATTENDANCE(request):
+    staff_id=Staff.objects.get(admin=request.user.id)
+    subject=Subject.objects.filter(staff=staff_id)
+    action=request.GET.get('action')
+    get_subject=None
+    students=None
+    if action is not None:
+        if request.method=="POST":
+            subject_id=request.POST.get('subject_id')
+            get_subject=Subject.objects.get(id=subject_id)
+
+            subject=Subject.objects.filter(id=subject_id)
+            for i in subject:
+                student_id=i.course.id
+                students=Student.objects.filter(course_id=student_id)
+
+    context={
+        'subject':subject,
+        'get_subject':get_subject,
+        'action':action,
+        'students':students
+
+    }
+    return render(request,'Staff/take_attendance.html',context)
+
